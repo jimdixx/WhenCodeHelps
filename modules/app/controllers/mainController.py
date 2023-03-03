@@ -1,17 +1,19 @@
 """
 class representing main controller for handling requests.
 """
+import sys
+sys.path.append("..")
 
-from typing import Union
-from fastapi import FastAPI
+from fastapi import APIRouter
 
-class mainApi:
-    app = FastAPI()
+class MainController:
+    router = APIRouter()
 
-    @app.get("/")
-    def read_root(self):
-        return {"Hello": "World"}
+    def __init__(self):
+        self.initRouters()
 
-    @app.get("/items/{item_id}")
-    def read_item(self, item_id: int, q: Union[str, None] = None):
-        return {"item_id": item_id, "q": q}
+    def mainContent(self):
+        return {"content": "content"}
+
+    def initRouters(self):
+        self.router.add_api_route("/", self.mainContent, methods=["GET"])
