@@ -38,7 +38,7 @@ class MainController:
     def initRouters(self):
         self.router.add_api_route("/audio", self.getAudioMetadata, methods=["GET"], status_code=200)
         self.router.add_api_route("/user", self.postRequest, methods=["POST"], status_code=200)
-        self.router.add_api_route("/upload", self.)
+        # self.router.add_api_route("/upload", self.)
 
     # @router.post("/dummypath", status_code=201)
     # async def dummy(self, name: str = Body(...), price: float = Body(...)):
