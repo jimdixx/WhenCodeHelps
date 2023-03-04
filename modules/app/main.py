@@ -12,8 +12,7 @@ app = FastAPI()
 
 jsonProcessor = JsonProcessor()
 
-mainController = MainController(jsonProcessor)
-app.include_router(mainController.router)
+
 
 loader = Loader("test.txt")
 data = loader.loadData()
@@ -27,3 +26,8 @@ audioProcessor.beta()
 
 # Getting array with metadata of slowed audio in .json format
 arr = audioProcessor.getArrayWithJson()
+
+
+# HANDLING API REQUESTS
+mainController = MainController(jsonProcessor, arr)
+app.include_router(mainController.router)
