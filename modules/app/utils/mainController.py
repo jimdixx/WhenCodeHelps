@@ -7,7 +7,7 @@ from fastapi import APIRouter, Request, File, UploadFile, Body
 from pydantic import BaseModel
 
 
-
+import json
 from .cloud import Cloud
 from .audioProcessor import Processor
 from .fileLoader import Loader
@@ -34,7 +34,10 @@ class MainController:
 
 
     def getAudioMetadata(self):
-        return self.arr
+        f = open("output.json")
+        data = json.load(f)
+        f.close()
+        return data
 
     async def postRequest(self, request: Request):
         request = await request.json()
@@ -61,8 +64,13 @@ class MainController:
         self.audioProcessor.beta()
         self.audioProcessor.getJoinedAudio()
 
+    def getAudio(self):
+        f = open("beta.mp3", "rb")
+
+
     def initRouters(self):
         self.router.add_api_route("/audio", self.getAudioMetadata, methods=["GET"], status_code=200)
         self.router.add_api_route("/user", self.postRequest, methods=["POST"], status_code=200)
         self.router.add_api_route("/upload", self.upload, methods=["POST"], status_code=200)
+        # self.router.add_api_route("/getAudio", self.getAudio, method=["GET"], status_code=200)
 
