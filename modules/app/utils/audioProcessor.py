@@ -44,6 +44,6 @@ class Processor:
 
             id += 1
 
-    def createJson(self):
-        string = self.json.jsonOutput(self.arr[0])
-        return string
+    def getArrayWithJson(self):
+        return self.arr
+
