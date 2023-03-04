@@ -17,5 +17,8 @@
   "action":{
     "default_popup": "index.html",
     "default_title": "Reading helper"
+  },
+  "icons": {
+    "128": "codeHelpsIcon.png"
   }
 }
