@@ -1,5 +1,5 @@
 from pydub import AudioSegment
-from utils import preprocess_words
+from modules.app.utils.utils import preprocess_words
 # Load the audio file
 pauza = AudioSegment.from_mp3("1secpause.mp3")
 concated = None

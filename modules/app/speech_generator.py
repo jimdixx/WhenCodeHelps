@@ -1,6 +1,6 @@
 from requests.auth import HTTPDigestAuth
 import requests
-from utils import preprocess_words
+from modules.app.utils.utils import preprocess_words
 
 ROOT = "https://services.speechtech.cz/tts/v4"
 USERNAME = "aimtechackathon"

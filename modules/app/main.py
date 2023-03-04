@@ -40,7 +40,7 @@ audio = AudioSegment.from_file("output.mp3", format="mp3")
 
 # Slow down the audio by a factor of 0.75
 slow_audio = audio._spawn(audio.raw_data, overrides={
-    "frame_rate": int(audio.frame_rate * 0.90)
+    "frame_rate": int(audio.frame_rate * 0.95)
 })
 slow_audio = slow_audio.set_frame_rate(audio.frame_rate)
 
