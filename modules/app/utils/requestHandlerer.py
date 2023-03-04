@@ -17,7 +17,7 @@ class ReqHendlerer:
         id = 0
         for text in self.arr:
             r = requests.get(self.ROOT + "/synth",
-                             data={"engine": "Iva30",  # Iva30, Jan30
+                             data={"engine": "Jan30",  # Iva30, Jan30
                                    "text": text,
                                    "format": "mp3",
                                    },
