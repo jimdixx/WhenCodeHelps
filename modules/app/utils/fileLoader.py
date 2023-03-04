@@ -7,7 +7,9 @@ class Loader:
     def loadData(self):
         data = []
         shorts = {"např.": "například", "Např.": "například", "tzn.": "to znamená",
-                  "Tzn.": "to znamená"}
+                  "Tzn.": "to znamená", "t.j.": "to jest", "T.j.": "To jest",
+                  "aj": "a jiné", "atd.": "a tak dále", "tzv.": "takzvaný", "str.": "strana",
+                  "č": "číslo"}
         with open(self.fName) as f:
             lines = f.readlines()
             for line in lines:
@@ -20,8 +22,10 @@ class Loader:
                             w = w.split()
                             split.pop(index)
                             split.insert(index, (w[0] + " " + w[1]))
-                    if((isinstance(w, list)) and (len(w) > 1)):
+                    if((isinstance(w, list)) and (len(w) > 1) and (len(w) <= 2)):
                         data.append(w[0] + ". " + w[1] + ".")
+                    if((isinstance(w, list)) and (len(w) > 2)):
+                        data.append(w[0] + ". " + w[1] + "." + w[2] + ".")
                     else:
                         data.append(w + ".")
 
