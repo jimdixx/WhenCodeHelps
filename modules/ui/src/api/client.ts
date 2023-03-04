@@ -22,3 +22,7 @@ export const getUser = async (username: string) => {
   );
   return response;
 };
+
+export const loginUser = async (username: string) => {
+  return await fetch(`${API_URL}/`, { method: "POST", body: username });
+};
