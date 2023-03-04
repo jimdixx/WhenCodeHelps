@@ -7,7 +7,7 @@ export const Player = (props: { url: string; timestamps: number[] }) => {
 
   const previousWord = () => {
     const previousStamps: number[] = [];
-    console.log({ audio, timestamps });
+    // console.log({ audio, timestamps });
     const currentTime = audio.current.currentTime;
     for (let i = 0; i < timestamps.length; i++) {
       if (timestamps[i] < currentTime) {
@@ -16,7 +16,7 @@ export const Player = (props: { url: string; timestamps: number[] }) => {
     }
 
     const rewindWord = previousStamps.pop();
-    console.log({ rewindWord });
+    // console.log({ rewindWord });
 
     if (!!rewindWord) audio.current.currentTime = rewindWord;
   };
