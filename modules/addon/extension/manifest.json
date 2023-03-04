@@ -1,0 +1,15 @@
+{
+  "name": "WhenCodeHelps",
+  "version": "1.0.0",
+  "description": "Code helps us with reading",
+  "manifest_version": 3,
+  "author": "Utopenci",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action":{
+    "default_popup": "index.html",
+    "default_title": "Latest Covid Report"
+  }
+}
