@@ -12,7 +12,6 @@ sys.path.append('../app')
 from utils.database import Database
 
 
-
 class MainController:
     router = APIRouter()
 
@@ -30,10 +29,16 @@ class MainController:
         request = await request.json()
         self.db.put_item(request)
 
+    async def uploadFile(self, request: Request):
+        request = await request.json()
+        # todo nacist textak z postu
+        # zahajit akci
+        pass
+
     def initRouters(self):
         self.router.add_api_route("/audio", self.getAudioMetadata, methods=["GET"], status_code=200)
         self.router.add_api_route("/user", self.postRequest, methods=["POST"], status_code=200)
-        # self.router.add_api_route("/process", self.)
+        self.router.add_api_route("/upload", self.)
 
     # @router.post("/dummypath", status_code=201)
     # async def dummy(self, name: str = Body(...), price: float = Body(...)):
