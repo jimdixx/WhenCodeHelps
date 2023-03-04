@@ -1,10 +1,24 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [content, setContent] = useState("")
 
+  useEffect(() => {
+    chrome.tabs && chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, (tabs) => {
+      // Callback function
+      chrome.tabs.sendMessage(
+        tabs[0]?.id || 0,
+        {type: 'getSelection'},
+        (response) => {
+          setContent(`${response?.data}`)
+        })
+    })
+    }, [])
   return (
     <div className="App">
       <div>
@@ -17,11 +31,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Content: "{content}"
         </p>
       </div>
       <p className="read-the-docs">

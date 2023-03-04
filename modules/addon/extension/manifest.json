@@ -8,8 +8,14 @@
     "activeTab",
     "scripting"
   ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./content.js"]
+    }
+  ],
   "action":{
     "default_popup": "index.html",
-    "default_title": "Latest Covid Report"
+    "default_title": "Reading helper"
   }
 }
