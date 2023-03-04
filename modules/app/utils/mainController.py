@@ -66,11 +66,12 @@ class MainController:
 
     def getAudio(self):
         f = open("beta.mp3", "rb")
+        return f.readlines()
 
 
     def initRouters(self):
         self.router.add_api_route("/audio", self.getAudioMetadata, methods=["GET"], status_code=200)
         self.router.add_api_route("/user", self.postRequest, methods=["POST"], status_code=200)
         self.router.add_api_route("/upload", self.upload, methods=["POST"], status_code=200)
-        # self.router.add_api_route("/getAudio", self.getAudio, method=["GET"], status_code=200)
+        self.router.add_api_route("/getAudio", self.getAudio, methods=["GET"], status_code=200)
 
