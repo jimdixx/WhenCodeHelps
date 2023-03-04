@@ -6,7 +6,7 @@ export interface User {
 
 export interface Recording {
     url: string;
-    timestamps: Number[];
+    timestamps: number[];
 }
 
 export interface UserLogin {
