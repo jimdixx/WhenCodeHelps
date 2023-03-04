@@ -1,6 +1,7 @@
-import json
+from json import JSONEncoder
 
-class JsonProcessor:
 
-    def jsonOutput(self, object):
-        return json.JSONEncoder().encode(object)
+class JsonProcessor(JSONEncoder):
+
+    def default(self, o):
+        return o.__dict__
