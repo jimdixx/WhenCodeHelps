@@ -26,27 +26,22 @@ class Processor:
 
             FILE_PATH = "fetched/" + mp3
 
-            if id == 0:
-                self.audio = AudioSegment.from_file(FILE_PATH, format="mp3")
-
-
             # Load the MP3 file
             audio = AudioSegment.from_file(FILE_PATH, format="mp3")
-
-            if id > 0:
-                self.audio.append(audio.raw_data)
 
             audioDto = Audio(id, audio.duration_seconds)
             self.arr.append(self.json.encode(audioDto))
 
             # Slow down the audio by a factor of 0.75
             slow_audio = audio._spawn(audio.raw_data, overrides={
-                "frame_rate": int(audio.frame_rate * 0.85)
+                "frame_rate": int(audio.frame_rate * 0.95)
             })
             slow_audio = slow_audio.set_frame_rate(audio.frame_rate)
 
-            # Export the slowed down audio to a new MP3 file
-            slow_audio.export("processed/output_" + str(id) + ".mp3", format="mp3")
+            if id == 0:
+                self.audio = slow_audio
+            else:
+                self.audio += slow_audio
 
             os.remove(FILE_PATH)
 
@@ -57,11 +52,3 @@ class Processor:
 
     def getJoinedAudio(self):
         self.audio.export("beta.mp3", format="mp3")
-
-
-"""
-autorizace služby v aws:
-    - IAM služba (Identity access manegement)
-    
-musím se autorizovat jako nějaký uživatel
-"""

@@ -38,6 +38,7 @@ audioProcessor = Processor(jsonProcessor)
 
 audioProcessor.beta()
 audioProcessor.getJoinedAudio()
+
 # Getting array with metadata of slowed audio in .json format
 arr = audioProcessor.getArrayWithJson()
 

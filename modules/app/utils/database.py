@@ -50,3 +50,10 @@ if __name__ == "__main__":
     key = {'id': 'your_key_value'}
     item = db.get_item(key)
     print(item)
+
+"""
+autorizace služby v aws:
+    - IAM služba (Identity access manegement)
+
+musím se autorizovat jako nějaký uživatel
+"""
