@@ -7,7 +7,7 @@ import { RecordsList } from "./components/RecordsList";
 
 function App() {
   const [page, setPage] = useState<"form" | "records">("form");
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<boolean>(false);
 

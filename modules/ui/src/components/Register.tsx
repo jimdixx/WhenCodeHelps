@@ -13,7 +13,10 @@ export const Register = () => {
 
   const handleLogin = async (e: ChangeEvent<any>) => {
     e.preventDefault();
-    if(login.username) await loginUser(login.username)
+    if(login.username) await loginUser({
+        userId: 'yo-mama',
+        username: login.username,
+    })
   }
   return (
     <div>
