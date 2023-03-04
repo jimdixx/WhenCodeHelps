@@ -13,12 +13,6 @@ class Database:
         self.table = None
 
     def connect(self):
-        self.client = boto3.client(
-            'dynamodb',
-            region_name=self.region_name,
-            aws_access_key_id=self.aws_access_key_id,
-            aws_secret_access_key=self.aws_secret_access_key
-        )
         self.table = boto3.resource(
             'dynamodb',
             region_name=self.region_name,
@@ -43,8 +37,7 @@ class Database:
             return None
 
 if __name__ == "__main__":
-    db = Database('dynamodb', 'eu-west-1', 'AKIAZW5Y5IATVYH5VLH7', '31rrl9bQQe+aRv6h+4i/NZbVVF2WAcoslgkU08y6')
-    db.connect()
+
 
     # Retrieve an item by its primary key
     key = {'id': 'your_key_value'}
