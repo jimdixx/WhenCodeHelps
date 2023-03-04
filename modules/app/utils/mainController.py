@@ -13,6 +13,7 @@ from .audioProcessor import Processor
 from .fileLoader import Loader
 from .database import Database
 from .requestHandlerer import ReqHendlerer
+from ast import literal_eval
 
 # setting path
 
@@ -26,9 +27,9 @@ class MainController:
         self.loader = loader
         self.handler = handler
         self.audioProcessor = audioProcessor
-        self.db = Database('users', 'eu-west-1', 'AKIAZW5Y5IATVYH5VLH7', '31rrl9bQQe+aRv6h+4i/NZbVVF2WAcoslgkU08y6')
+        self.db = Database('users', 'eu-west-1', '', '')
         self.db.connect()
-        self.cloud = Cloud('aimtechackathon-mp3s', 'eu-west-1', 'AKIAZW5Y5IATVYH5VLH7', '31rrl9bQQe+aRv6h+4i/NZbVVF2WAcoslgkU08y6')
+        self.cloud = Cloud('aimtechackathon-mp3s', 'eu-west-1', '', '')
         self.cloud.connect()
         self.arr = []
 
@@ -52,6 +53,17 @@ class MainController:
 
         return {"200": "OK"}
 
+    async def uploadText(self, request: Request):
+        data = await request.json()
+
+        data = json.dumps(data)
+
+        with open("files/test.txt", "w+") as f:
+            f.write(data)
+
+        self.init("files/test.txt")
+
+
     def init(self, name):
         self.loader = Loader(name)
         data = self.loader.loadData()
@@ -74,4 +86,5 @@ class MainController:
         self.router.add_api_route("/user", self.postRequest, methods=["POST"], status_code=200)
         self.router.add_api_route("/upload", self.upload, methods=["POST"], status_code=200)
         self.router.add_api_route("/getAudio", self.getAudio, methods=["GET"], status_code=200)
+        self.router.add_api_route("/uploadText", self.uploadText, methods=["POST"], status_code=200)
 
