@@ -63,6 +63,7 @@ class MainController:
 
         self.init("files/test.txt")
 
+        return {"200": "OK"}
 
     def init(self, name):
         self.loader = Loader(name)
