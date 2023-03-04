@@ -1,3 +1,4 @@
+import re
 class Loader:
 
     def __init__(self, fileName):
@@ -13,8 +14,20 @@ class Loader:
         with open(self.fName) as f:
             lines = f.readlines()
             for line in lines:
-                split = line.split(" ")
+                # deleting the unwanted chars in the input file
+                pattern = re.compile("[^a-zA-Z0-9.+ěščřžýáíéĚŠČŘŽÝÁÍÉü]")
+                cleaned_string = pattern.sub(' ', line)
+                cleaned_string = re.sub(' +', ' ', cleaned_string)
+                cleaned_string = cleaned_string.lstrip()
+                cleaned_string = cleaned_string.rstrip()
+                split = cleaned_string.split(" ")
                 for index, w in enumerate(split):
+                    """
+                    if(re.match('\d', w) and index >= 1):
+                        char_before = split[index-1]
+                        if(char_before.lower() == "po"):
+                            w = "páté"
+                    """
                     if w in list(shorts.keys()):
                         w = w.replace(w, shorts[w])
                         tmp = w.split()
