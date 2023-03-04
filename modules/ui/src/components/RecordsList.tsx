@@ -6,10 +6,10 @@ import { getAudioTimestamps } from "../api/client";
 export const RecordsList = () => {
   const [recordings, setRecordings] = useState<Recording[]>([]);
   useEffect(() => {
-    fetchAudiTimestamps();
+    fetchAudioTimestamps();
   }, []);
 
-  const fetchAudiTimestamps = useCallback(async () => {
+  const fetchAudioTimestamps = useCallback(async () => {
     return await getAudioTimestamps().then((stamps) =>
       setRecordings([
         {

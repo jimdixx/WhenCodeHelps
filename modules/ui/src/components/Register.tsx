@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { UserRegister } from "../types";
 
 export const Register = () => {
-    const [login, setLogin] = useState<UserRegister>({ email: "", password: "", confirmPassword: "" });
+    const [login, setLogin] = useState<UserRegister>({ username: "", password: "", confirmPassword: "" });
   const handleChange = (e: ChangeEvent<any>) => {
     const { name, value } = e.target;
     setLogin((prevInput) => {
@@ -14,11 +14,11 @@ export const Register = () => {
       <h2 className="mt-0">Create new account</h2>
       <form className="p-2">
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
+          type="text"
+          name="username"
+          placeholder="Username"
           className="input input-bordered input-primary w-full max-w-xs my-2"
-          value={login.email}
+          value={login.username}
           onChange={handleChange}
         />
         <input

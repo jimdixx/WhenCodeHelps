@@ -1,12 +1,24 @@
-export const API_URL = 'http://localhost:8000'
+export const API_URL = "http://localhost:8000";
 
 export const getAudioTimestamps = async () => {
-    const response = await fetch(`${API_URL}/audio`).then(res => res.json());
-    const timestamps: number[] = [];
-    for (let i = 0; i < response.length; i++) {
-        i === 0 ? timestamps.push(response[i].timestamp) : timestamps.push(response[i] + response[i-1]);
-    }
-    console.log({timestamps});
-    
-    return timestamps;
-}
+  const response = await fetch(`${API_URL}/audio`).then((res) => res.json());
+  console.log({ response });
+
+  const timestamps: number[] = [];
+  const responseObj = response.map((res: any) => JSON.parse(res));
+  for (let i = 0; i < response.length; i++) {
+    i === 0
+      ? timestamps.push(responseObj[i].time)
+      : timestamps.push(responseObj[i].time + timestamps[i - 1]);
+  }
+  console.log({ timestamps });
+
+  return timestamps;
+};
+
+export const getUser = async (username: string) => {
+  const response = await fetch(`${API_URL}/user/${username}`).then((res) =>
+    res.json()
+  );
+  return response;
+};

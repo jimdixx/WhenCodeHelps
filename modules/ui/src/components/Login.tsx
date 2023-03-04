@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { UserLogin } from "../types";
 
 export const Login = () => {
-  const [login, setLogin] = useState<UserLogin>({ email: "", password: "" });
+  const [login, setLogin] = useState<UserLogin>({ username: "", password: "" });
   const handleChange = (e: ChangeEvent<any>) => {
     const { name, value } = e.target;
     setLogin((prevInput) => {
@@ -14,11 +14,11 @@ export const Login = () => {
       <h2 className="mt-0">Login to your account</h2>
       <form className="p-2">
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
+          type="username"
+          name="username"
+          placeholder="Username"
           className="input input-bordered input-primary w-full max-w-xs my-2"
-          value={login.email}
+          value={login.username}
           onChange={handleChange}
         />
         <input
