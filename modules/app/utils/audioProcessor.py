@@ -11,7 +11,7 @@ class Audio:
 
 class Processor:
 
-    def __init__(self, jsonProcessor):
+    def __init__(self, jsonProcessor=None):
         self.json = jsonProcessor
         self.arr = []
         self.audio = None
@@ -46,6 +46,9 @@ class Processor:
             os.remove(FILE_PATH)
 
             id += 1
+        with open("output.json", "w+") as f:
+            f.write(self.json.encode(self.arr))
+
 
     def getArrayWithJson(self):
         return self.arr

@@ -1,9 +1,12 @@
 import re
 class Loader:
 
-    def __init__(self, fileName):
+    def __init__(self, fileName=None):
         self.fName = fileName
         self.loadedData = []
+
+    def setFile(self, fileName):
+        self.fName = fileName
 
     def loadData(self):
         data = []

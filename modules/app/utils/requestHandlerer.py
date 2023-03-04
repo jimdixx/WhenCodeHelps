@@ -9,7 +9,7 @@ class ReqHendlerer:
     PASSWORD = "lu7Eabuu7E"
     DELAY = 0.3
 
-    def __init__(self, arr):
+    def __init__(self, arr=None):
         self.arr = arr
         self.processed = []
 

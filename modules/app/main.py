@@ -4,7 +4,7 @@ Main class which starts its server (mainly
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from controllers.mainController import MainController
+from utils.mainController import MainController
 from utils.jsonProcessor import JsonProcessor
 from utils.fileLoader import Loader
 from utils.requestHandlerer import ReqHendlerer
@@ -25,24 +25,11 @@ app.add_middleware(
 
 
 jsonProcessor = JsonProcessor()
-
-
-
-loader = Loader("test.txt")
-data = loader.loadData()
-
-handler = ReqHendlerer(data)
-handler.call()
-
-audioProcessor = Processor(jsonProcessor)
-
-audioProcessor.beta()
-audioProcessor.getJoinedAudio()
-
-# Getting array with metadata of slowed audio in .json format
-arr = audioProcessor.getArrayWithJson()
+loader = Loader()
+handler = ReqHendlerer()
+audioProcessor = Processor()
 
 
 # HANDLING API REQUESTS
-mainController = MainController(jsonProcessor, arr)
+mainController = MainController(jsonProcessor, loader, handler, audioProcessor)
 app.include_router(mainController.router)
