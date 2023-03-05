@@ -1,12 +1,9 @@
 import re
 class Loader:
 
-    def __init__(self, fileName=None):
+    def __init__(self, fileName = None):
         self.fName = fileName
         self.loadedData = []
-
-    def setFile(self, fileName):
-        self.fName = fileName
 
     def loadData(self):
         data = []
@@ -17,20 +14,12 @@ class Loader:
         with open(self.fName) as f:
             lines = f.readlines()
             for line in lines:
-                # deleting the unwanted chars in the input file
+                # deleting the unwanted characters
                 pattern = re.compile("[^a-zA-Z0-9.+ěščřžýáíéĚŠČŘŽÝÁÍÉü]")
-                cleaned_string = pattern.sub(' ', line)
-                cleaned_string = re.sub(' +', ' ', cleaned_string)
-                cleaned_string = cleaned_string.lstrip()
-                cleaned_string = cleaned_string.rstrip()
-                split = cleaned_string.split(" ")
+                edited_line = re.sub(pattern, " ", line)
+                edited_line = re.sub(r"\s{2,}", " ", edited_line.strip())
+                split = edited_line.split(" ")
                 for index, w in enumerate(split):
-                    """
-                    if(re.match('\d', w) and index >= 1):
-                        char_before = split[index-1]
-                        if(char_before.lower() == "po"):
-                            w = "páté"
-                    """
                     if w in list(shorts.keys()):
                         w = w.replace(w, shorts[w])
                         tmp = w.split()
@@ -60,4 +49,3 @@ class Loader:
                 data[idx + 1] = data[idx].replace(".", "") + "" + data[idx + 1]
                 data.pop(idx)
         return data
-

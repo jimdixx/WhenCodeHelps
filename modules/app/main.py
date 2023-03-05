@@ -9,9 +9,10 @@ from utils.jsonProcessor import JsonProcessor
 from utils.fileLoader import Loader
 from utils.requestHandlerer import ReqHendlerer
 from utils.audioProcessor import Processor
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = ["*"]
 

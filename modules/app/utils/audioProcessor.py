@@ -54,4 +54,4 @@ class Processor:
         return self.arr
 
     def getJoinedAudio(self):
-        self.audio.export("beta.mp3", format="mp3")
+        self.audio.export("static/beta.mp3", format="mp3")

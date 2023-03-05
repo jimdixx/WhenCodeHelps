@@ -1,20 +1,37 @@
-import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
+import {useCallback, useEffect, useState} from 'react'
 import './App.css'
 import {Player} from "./components/Player";
+import {API_URL, getAudioTimestamps, getRecord, pushText} from "./api/client";
 
 const simplifyKey = 'simplify'
 function App() {
   const [content, setContent] = useState("")
   const [simplify, setSimplify] = useState<boolean | undefined>(undefined)
-  const [record, setRecord] = useState<{ url: string, timestamps: number[] } | undefined>({
-    url: "https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3",
-    timestamps: [1,2,5],
-  })
-
+  const [timestamps, setTimestamps] = useState<number[] | undefined>(undefined)
+  const [cycle, setCycle] = useState(0)
+  const record = `${API_URL}/static/beta.mp3`
   useEffect(() => {
     chrome.storage.local.get().then(res => setSimplify(!!res[simplifyKey]))
   }, [])
+
+  useEffect(() => {
+    if (simplify!==undefined){
+      pushText(content)
+      setCycle(1)
+    }
+  }, [simplify])
+
+  useEffect(() => {
+    if(cycle > 0 && ! timestamps) {
+      fetchAudioTimestamps();
+    }
+  }, [cycle]);
+
+  const fetchAudioTimestamps = useCallback(async () => {
+    return await getAudioTimestamps().then((stamps) =>
+      setTimestamps(stamps)
+    ).catch(() => {setTimeout(() => setCycle(prev => prev + 1), 12000)})
+  }, []);
   useEffect(() => {
     chrome.tabs && chrome.tabs.query({
       active: true,
@@ -42,12 +59,12 @@ function App() {
         return !prev
       })} />} Simplify</label>
       <div className="card">
+        {timestamps ? (
+          <Player url={record} timestamps={timestamps || []} />
+        ) : 'LOADING...'}
         <p>
           Content: "{content}"
         </p>
-        {record && (
-          <Player url={record.url} timestamps={record.timestamps} />
-        )}
       </div>
     </div>
   )

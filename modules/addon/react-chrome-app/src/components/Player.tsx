@@ -23,7 +23,7 @@ export const Player = (props: { url: string; timestamps: number[] }) => {
 
   return (
     <div className="rounded-lg shadow-lg shadow-black p-4 flex justify-center text-center prose">
-      <audio controls ref={audio}>
+      <audio controls ref={audio} autoPlay>
         <source src={url} type="audio/mpeg"></source>
         Your browser does not support the <code>audio</code> element.
       </audio>

@@ -56,7 +56,7 @@ class MainController:
     async def uploadText(self, request: Request):
         data = await request.json()
 
-        data = json.dumps(data)
+        data = json.dumps(data, ensure_ascii = False)
 
         with open("files/test.txt", "w+") as f:
             f.write(data)
@@ -79,7 +79,7 @@ class MainController:
 
     def getAudio(self):
         f = open("beta.mp3", "rb")
-        return f.readlines()
+        return f.read()
 
 
     def initRouters(self):
