@@ -28,7 +28,7 @@ export const Player = (props: { url: string; timestamps: number[] }) => {
         Your browser does not support the <code>audio</code> element.
       </audio>
       <button className="btn btn-primary ml-2" onClick={previousWord}>
-        Previous word
+        To the beginning
       </button>
     </div>
   );

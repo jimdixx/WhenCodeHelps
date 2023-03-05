@@ -16,10 +16,10 @@ export const getAudioTimestamps = async () => {
   return timestamps;
 };
 
-export const pushText = async (text: string) => {
+export const pushText = async (text: string, simplify: boolean) => {
   const response = await fetch(`${API_URL}/uploadText`, {
     method: 'POST',
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ text, simplify }),
     headers: {
       "Accept": "*/*"
 

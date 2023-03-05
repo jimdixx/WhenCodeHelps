@@ -2,7 +2,7 @@
 class representing main controller for handling requests.
 """
 import shutil
-
+import openai
 from fastapi import APIRouter, Request, File, UploadFile, Body
 from pydantic import BaseModel
 
@@ -16,6 +16,21 @@ from .requestHandlerer import ReqHendlerer
 from ast import literal_eval
 
 # setting path
+# GPT-3 API anahtarınızı kullanarak OpenAI API'yi yapılandırın
+openai.api_key = "APIKEY-XXXX"
+
+def generate_response(prompt):
+  completions = openai.Completion.create(
+      engine="text-davinci-003",
+      prompt="Zjednodusi nasledujici text: \"" + prompt + "\"",
+      max_tokens=1024,
+      n=1,
+      stop=None,
+      temperature=0.5,
+  )
+
+  message = completions.choices[0].text
+  return message
 
 
 class MainController:
@@ -55,6 +70,9 @@ class MainController:
 
     async def uploadText(self, request: Request):
         data = await request.json()
+
+        if data["simplify"]:
+            data["text"] = generate_response(data["text"])
 
         data = json.dumps(data, ensure_ascii = False)
 

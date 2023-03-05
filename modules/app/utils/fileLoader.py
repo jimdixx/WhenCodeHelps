@@ -15,12 +15,13 @@ class Loader:
             lines = f.readlines()
             for idx, line in enumerate(lines):
                 # deleting the unwanted characters
+                edited_line = re.sub("\\\\n", "", line)
                 pattern = re.compile("[^a-zA-Z0-9.+ěščřžýáíéĚŠČŘŽÝÁÍÉüůú]")
-                edited_line = re.sub(pattern, " ", line)
+                edited_line = re.sub(pattern, " ", edited_line)
                 edited_line = re.sub(r"\s{2,}", " ", edited_line.strip())
                 split = edited_line.split(" ")
                 if(idx == 0):
-                    split = split[1:len(split)]
+                    split = split[1:len(split)-2]
                 for index, w in enumerate(split):
                     if w in list(shorts.keys()):
                         w = w.replace(w, shorts[w])

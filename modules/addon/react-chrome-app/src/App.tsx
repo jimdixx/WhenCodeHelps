@@ -17,8 +17,7 @@ function App() {
 
   useEffect(() => {
     if (simplify!==undefined && content !== undefined){
-      pushText(content)
-      setCycle(1)
+      pushText(content, simplify).then(() => setCycle(1))
     }
   }, [simplify, content])
 
