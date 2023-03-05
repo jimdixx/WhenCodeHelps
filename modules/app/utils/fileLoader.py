@@ -13,12 +13,14 @@ class Loader:
                   "č": "číslo"}
         with open(self.fName) as f:
             lines = f.readlines()
-            for line in lines:
+            for idx, line in enumerate(lines):
                 # deleting the unwanted characters
-                pattern = re.compile("[^a-zA-Z0-9.+ěščřžýáíéĚŠČŘŽÝÁÍÉü]")
+                pattern = re.compile("[^a-zA-Z0-9.+ěščřžýáíéĚŠČŘŽÝÁÍÉüůú]")
                 edited_line = re.sub(pattern, " ", line)
                 edited_line = re.sub(r"\s{2,}", " ", edited_line.strip())
                 split = edited_line.split(" ")
+                if(idx == 0):
+                    split = split[1:len(split)]
                 for index, w in enumerate(split):
                     if w in list(shorts.keys()):
                         w = w.replace(w, shorts[w])
@@ -29,7 +31,7 @@ class Loader:
                             split.insert(index, (w[0] + " " + w[1]))
                     if((isinstance(w, list)) and (len(w) > 1) and (len(w) <= 2)):
                         data.append(w[0] + ". " + w[1] + ".")
-                    if((isinstance(w, list)) and (len(w) > 2)):
+                    elif((isinstance(w, list)) and (len(w) > 2)):
                         data.append(w[0] + ". " + w[1] + "." + w[2] + ".")
                     else:
                         data.append(w + ".")
